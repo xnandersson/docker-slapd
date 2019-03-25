@@ -1,2 +1,0 @@
-# docker-slapd
-LDAP Server
