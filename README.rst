@@ -56,5 +56,8 @@ Testing
 
 .. code:: bash
 
+  $ echo URL ldap://127.0.0.1 > ~/.ldaprc
+  $ echo BASE DC=openforce,DC=org >> ~/.ldaprc
   $ echo TLS_REQCERT ALLOW >> ~/.ldaprc
-  $ ldapsearch
+  $ ldapsearch -x -w Secret007! -D "cn=admin,dc=openforce,dc=org"
+  $ ldapsearch -x -w secret -D "uid=nandersson,ou=Users,dc=openforce,dc=org"
