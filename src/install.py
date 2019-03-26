@@ -18,15 +18,15 @@ def install_slapd(domain=None, password=None, organization=None):
     proc.wait()
     proc = subprocess.Popen(['apt-get', 'install', 'slapd', 'ldap-utils', '-y'], stderr=open(os.devnull, 'w'))
     proc.wait()
-    proc = subprocess.Popen(['slapadd', '-v', '-F', '/etc/ldap/slapd.d/', '-l', '/templates/sudo.ldif', '-b', 'cn=config'])
+    proc = subprocess.Popen(['slapadd', '-v', '-F', '/etc/ldap/slapd.d/', '-l', '/templates/sudo-schema.ldif', '-b', 'cn=config'])
     proc.wait()
-    t = Template(open('/templates/domain.ldif.jinja2').read())
-    with open('/tmp/domain.ldif', 'w') as f:
+    t = Template(open('/templates/dit.ldif.jinja2').read())
+    with open('/tmp/dit.ldif', 'w') as f:
         f.write(t.render(
             dc = domain.split('.')[0],
             tld = domain.split('.')[1]
         ))
-    proc = subprocess.Popen(['slapadd', '-l', '/tmp/domain.ldif'])
+    proc = subprocess.Popen(['slapadd', '-l', '/tmp/dit.ldif'])
     proc.wait()
     t = Template(open('/templates/nandersson.ldif.jinja2').read())
     with open('/tmp/nandersson.ldif', 'w') as f:
