@@ -1,0 +1,15 @@
+dn: cn=defaults,ou=SUDOers,dc={{ dc }},dc={{ tld }}
+objectClass: top
+objectClass: sudoRole
+cn: defaults
+description: Default sudoOption's go here
+
+dn: cn=nandersson,ou=SUDOers,dc={{ dc }},dc={{ tld }}
+objectClass: top
+objectClass: sudoRole
+cn: nandersson
+sudoUser: nandersson
+sudoHost: ALL
+sudoCommand: ALL
+sudoOption: !authenticate
+

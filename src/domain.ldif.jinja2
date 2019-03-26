@@ -1,0 +1,48 @@
+# Subtree for users
+dn: ou=Users,dc={{ dc }},dc={{ tld }}
+ou: Users
+description: {{ dc }}.{{ tld }} Users
+objectClass: OrganizationalUnit
+
+# Subtree for groups
+dn: ou=Groups,dc={{ dc }},dc={{ tld }}
+ou: Groups
+description: {{ dc }}.{{ tld }} Groups
+objectClass: OrganizationalUnit
+
+# Subtree for groups
+dn: ou=SUDOers,dc={{ dc }},dc={{ tld }}
+ou: SUDOers 
+description: SUDO Policy
+objectClass: OrganizationalUnit
+
+# Subtree for system accounts
+dn: ou=System,dc={{ dc }},dc={{ tld }}
+ou: System
+description: Special accounts used by software applications.
+objectClass: OrganizationalUnit
+
+##
+## USERS
+##
+
+# Niklas Andersson
+dn: uid=nandersson,ou=Users,dc={{ dc }},dc={{ tld }}
+ou: Users
+# Name info
+uid: nandersson
+cn: Niklas Andersson
+sn: Andersson
+givenName: Niklas
+displayName: Niklas Andersson
+# Work info
+title: Consultant
+description: Consultant Open Source Software
+mail: nandersson@{{ dc }}.se
+mail: nandersson@{{ dc }}.{{ tld }}
+telephoneNumber: +34 651 757 188
+userPassword: secret
+# Object Classes:
+objectClass: person
+objectClass: OrgnizationalPerson
+objectClass: inetOrgPerson
