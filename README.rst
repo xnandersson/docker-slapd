@@ -25,7 +25,7 @@ Prerequisites
 
 .. code:: bash
     
-  $ sudo apt-get install docker.io ldap-utils
+  $ sudo apt-get install docker.io ldap-utils -y
   $ sudo usermod -a -G docker $(whoami) 
   $ su - $USER
   $ docker pull ubuntu:latest

@@ -27,7 +27,8 @@ COPY templates /templates
 ADD install.py /usr/local/bin/install.py
 RUN chmod +x /usr/local/bin/install.py
 EXPOSE 22 389 636
-CMD /bin/bash""")
+CMD /usr/local/bin/install.py
+""")
 
 if __name__ == '__main__':
     print(BUILD_DIR)

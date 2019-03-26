@@ -52,10 +52,10 @@ def install_slapd(domain=None, password=None, organization=None):
         ))
 
 def slapd():
-#proc = subprocess.Popen(["/usr/sbin/slapd", "-d", "5", "-h", "'ldap:/// ldapi:///'", "-g", "openldap", "-u", "openldap", "-F", "/etc/ldap/slapd.d"])
     proc = subprocess.Popen(['/usr/sbin/slapd', '-d', '5', '-h', 'ldap:/// ldapi:///', '-g', 'openldap', '-u', 'openldap', '-F', '/etc/ldap/slapd.d'])
     proc.wait()
 
 if __name__ == '__main__':
-    install_slapd(domain=DOMAIN, password=PASSWORD, organization=ORGANIZATION)
+    if not os.path.isdir('/var/lib/ldap'):
+        install_slapd(domain=DOMAIN, password=PASSWORD, organization=ORGANIZATION)
     slapd()
