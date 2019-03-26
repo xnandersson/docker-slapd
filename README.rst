@@ -19,6 +19,7 @@ Creates a Docker Image, preloaded with slapd
     -p 389:389 \
     xnandersson/slapd /usr/local/bin/install.py
 
+
 Prerequisites
 -------------
 
@@ -29,8 +30,17 @@ Prerequisites
   $ su - $USER
   $ docker pull ubuntu:latest
 
-Install
--------
+
+Docker Build Option
+-------------------
+
+.. code:: bash
+
+  $ docker build . -t xnandersson/slapd
+
+
+Python Build Option
+-------------------
 
 .. code:: bash
 
@@ -40,3 +50,11 @@ Install
   $ python src/docker-slapd.py
   $ echo TLS_REQCERT ALLOW >> ~/.ldaprc
   $ pytest
+
+Testing
+-------
+
+.. code:: bash
+
+  $ echo TLS_REQCERT ALLOW >> ~/.ldaprc
+  $ ldapsearch
