@@ -7,18 +7,32 @@ Abstract
 
 Creates a Docker Image, preloaded with slapd
 
+Example: Container with defaults, delete on exit
+------------------------------------------------
 .. code:: bash
 
   $ docker run \
     --name slapd \
     --rm \
-    -ti \
     -e DOMAIN=openforce.org \
     -e PASSWORD=Secret007! \
     -e ORGANIZATION="Openforce AB"\
     -p 389:389 \
-    xnandersson/slapd /usr/local/bin/install.py
+    xnandersson/slapd
 
+Example: Container with customized templates from local host
+------------------------------------------------------------
+
+.. code:: bash
+
+  $ docker run \
+    --name slapd \
+    -e DOMAIN=openforce.org \
+    -e PASSWORD=Secret007! \
+    -e ORGANIZATION="Openforce AB"\
+    -p 389:389 \
+    -v /home/nandersson/Github/xnandersson/docker-slapd/src/templates:/templates \
+    xnandersson/slapd 
 
 Prerequisites
 -------------
