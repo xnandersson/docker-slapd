@@ -8,7 +8,7 @@ PASSWORD = os.getenv('PASSWORD', 'Secret012')
 ORGANIZATION = os.getenv('ORGANIZATION', 'Acme Ltd')
 
 def install_slapd(domain=None, password=None, organization=None):
-    t = Template(open('/tmp/slapd.debconf.jinja2').read())
+    t = Template(open('/templates/slapd.debconf.jinja2').read())
     with open('/tmp/slapd.debconf', 'w') as f:
         f.write(t.render(
                     domain = domain,
@@ -18,9 +18,9 @@ def install_slapd(domain=None, password=None, organization=None):
     proc.wait()
     proc = subprocess.Popen(['apt-get', 'install', 'slapd', 'ldap-utils', '-y'], stderr=open(os.devnull, 'w'))
     proc.wait()
-    proc = subprocess.Popen(['slapadd', '-v', '-F', '/etc/ldap/slapd.d/', '-l', '/tmp/sudo.ldif', '-b', 'cn=config'])
+    proc = subprocess.Popen(['slapadd', '-v', '-F', '/etc/ldap/slapd.d/', '-l', '/templates/sudo.ldif', '-b', 'cn=config'])
     proc.wait()
-    t = Template(open('/tmp/domain.ldif.jinja2').read())
+    t = Template(open('/templates/domain.ldif.jinja2').read())
     with open('/tmp/domain.ldif', 'w') as f:
         f.write(t.render(
             dc = domain.split('.')[0],
@@ -28,7 +28,7 @@ def install_slapd(domain=None, password=None, organization=None):
         ))
     proc = subprocess.Popen(['slapadd', '-l', '/tmp/domain.ldif'])
     proc.wait()
-    t = Template(open('/tmp/nandersson.ldif.jinja2').read())
+    t = Template(open('/templates/nandersson.ldif.jinja2').read())
     with open('/tmp/nandersson.ldif', 'w') as f:
         f.write(t.render(
                     dc = domain.split('.')[0],
@@ -44,7 +44,7 @@ def install_slapd(domain=None, password=None, organization=None):
     proc.wait()
     proc = subprocess.Popen(['chown', '-R', 'openldap:openldap', '/etc/ldap/slapd.d/'])
     proc.wait()
-    t = Template(open('/tmp/ldap.conf.jinja2').read())
+    t = Template(open('/templates/ldap.conf.jinja2').read())
     with open('/etc/ldap/ldap.conf', 'w') as f:
         f.write(t.render(
             dc = domain.split('.')[0],
