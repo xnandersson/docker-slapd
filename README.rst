@@ -51,7 +51,7 @@ Package Dependencies
 
 .. code:: bash
     
-  $ sudo apt-get install docker.io python3-dev devscripts libldap2-dev libsasl2-dev ldap-utils -y
+  $ sudo apt-get install docker.io python3-venv python3-dev devscripts libldap2-dev libsasl2-dev ldap-utils -y
   $ sudo usermod -a -G docker $(whoami) 
   $ su - $USER
   $ docker pull ubuntu:latest
@@ -65,7 +65,7 @@ Pytest
   $ source ~/venv3/docker-slapd/bin/activate
   $ pip install -r requirements.txt
   $ echo TLS_REQCERT ALLOW >> ~/.ldaprc
-  $ pytest
+  $ pytest tests/
 
 LDAP Search
 -----------
