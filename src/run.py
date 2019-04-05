@@ -28,13 +28,13 @@ def install_slapd(domain=None, password=None, organization=None):
         ))
     proc = subprocess.Popen(['slapadd', '-l', '/tmp/dit.ldif'])
     proc.wait()
-    t = Template(open('/templates/nandersson.ldif.jinja2').read())
-    with open('/tmp/nandersson.ldif', 'w') as f:
+    t = Template(open('/templates/fixture.ldif.jinja2').read())
+    with open('/tmp/fixture.ldif', 'w') as f:
         f.write(t.render(
                     dc = domain.split('.')[0],
                     tld = domain.split('.')[1]
         ))
-    proc = subprocess.Popen(['slapadd', '-l', '/tmp/nandersson.ldif'])
+    proc = subprocess.Popen(['slapadd', '-l', '/tmp/fixture.ldif'])
     proc.wait()
     proc = subprocess.Popen(['chown', '-R', 'openldap:openldap', '/var/lib/ldap'])
     proc.wait()

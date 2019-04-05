@@ -7,35 +7,47 @@ Abstract
 
 Creates a Docker Image, preloaded with slapd
 
-Example: Container with defaults, delete on exit
-------------------------------------------------
+Build
+-----
+
 .. code:: bash
 
-  $ docker run \
+  $ sudo docker build -t xnandersson/slapd .
+
+Run: Defaults, delete on exit
+------------------------------------------------
+
+.. code:: bash
+
+  $ sudo docker run \
     --name slapd \
     --rm \
+    -d \
     -e DOMAIN=openforce.org \
     -e PASSWORD=Secret007! \
     -e ORGANIZATION="Openforce AB"\
     -p 389:389 \
     xnandersson/slapd
 
-Example: Container with customized templates from local host
+
+Run: Customized templates
 ------------------------------------------------------------
 
 .. code:: bash
 
-  $ docker run \
+  $ sudo docker run \
     --name slapd \
+    --rm \
+    -d \
     -e DOMAIN=openforce.org \
     -e PASSWORD=Secret007! \
     -e ORGANIZATION="Openforce AB"\
     -p 389:389 \
-    -v /home/nandersson/Github/xnandersson/docker-slapd/src/templates:/templates \
+    -v /home/${USER}/Github/xnandersson/docker-slapd/src/templates:/templates \
     xnandersson/slapd 
 
-Prerequisites
--------------
+Package Dependencies
+--------------------
 
 .. code:: bash
     
@@ -44,17 +56,8 @@ Prerequisites
   $ su - $USER
   $ docker pull ubuntu:latest
 
-
-Docker Build Option
--------------------
-
-.. code:: bash
-
-  $ docker build . -t xnandersson/slapd
-
-
-Python Build Option
--------------------
+Pytest
+------
 
 .. code:: bash
 
@@ -65,8 +68,8 @@ Python Build Option
   $ echo TLS_REQCERT ALLOW >> ~/.ldaprc
   $ pytest
 
-Testing
--------
+LDAP Search
+-----------
 
 .. code:: bash
 
