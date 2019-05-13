@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  slapd:
+    build:
+      context: .
+    image: xnandersson/slapd
+    ports:
+     - 389:389
+    environment:
+      DOMAIN: openforce.org
+      PASSWORD: Secret007!
+      ORGANIZATION: "Openforce AB"
